@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Adam's personal blogs-Adam 个人博客</title>
+		<title>sync.Cond</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -22,10 +22,9 @@
 
 							<!-- Logo -->
 								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Adam's Blog</span>
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Using sync.Cond 使用sync.Cond</span>
 								</a>
-
-							<!-- Nav -->
+						 
 								<nav>
 									<ul>
 										<li><a href="#menu">Menu</a></li>
@@ -50,47 +49,77 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<header>
-								<h1>Adam's personal blogs-Adam 个人博客<br /></h1>
-								<h3>Personal articles mainly about Golang 主要内容是go语言的文章</a>.</h3>
-								<p>Go学习与使用</p>
-							</header>
-							<section class="tiles">
-								<article class="style1">
-									<span class="image">
-										<img src="images/pic01.jpg" alt="" />
-									</span>
-									<a href="chanreplacewaitgroup.html">
-										<h2>Channel replace WaitGroup</h2>
-										<div class="content">
-											<p>Using Channel to replace sync.WaitGroup.用Channel代替sync.Waitgroup</p>
-										</div>
-									</a>
-								</article>
-								<article class="style2">
-									<span class="image">
-										<img src="images/pic02.jpg" alt="" />
-									</span>
-									<a href="semaphore.html">
-										<h2>Chan apply Semaphore-channel 实现信号量</h2>
-										<div class="content">
-											<p>Using channel to apply semaphore-使用channel 实现信号量</p>
-										</div>
-									</a>
-								</article>
-								<article class="style3">
-									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Feugiat</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-				 
-							</section>
+							<h3>channel apply semaphore-使用Channel实现信号量</h3>
+							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
+							<p >
+								<pre>
+func GetSqrt(n int, name string, chSem chan string) {
+	chSem <- name
+	sqrt := math.Sqrt(float64(n))
+	fmt.Printf("%d 平方=%f.2f\n", n, sqrt)
+	<-chSem
+}
+func main() {
+	chSem := make(chan string, 5)
+	for i := 0; i < 50; i++ {
+		go GetSqrt(i, strconv.Itoa(i), chSem)
+	}
+	time.Sleep(4 * time.Second)
+}
+
+-------------------------------------------
+0 平方=0.000000.2f
+3 平方=1.732051.2f
+4 平方=2.000000.2f
+5 平方=2.236068.2f
+6 平方=2.449490.2f
+7 平方=2.645751.2f
+29 平方=5.385165.2f
+30 平方=5.477226.2f
+31 平方=5.567764.2f
+32 平方=5.656854.2f
+33 平方=5.744563.2f
+34 平方=5.830952.2f
+28 平方=5.291503.2f
+9 平方=3.000000.2f
+10 平方=3.162278.2f
+11 平方=3.316625.2f
+12 平方=3.464102.2f
+13 平方=3.605551.2f
+14 平方=3.741657.2f
+15 平方=3.872983.2f
+49 平方=7.000000.2f
+8 平方=2.828427.2f
+18 平方=4.242641.2f
+35 平方=5.916080.2f
+36 平方=6.000000.2f
+37 平方=6.082763.2f
+38 平方=6.164414.2f
+39 平方=6.244998.2f
+40 平方=6.324555.2f
+41 平方=6.403124.2f
+42 平方=6.480741.2f
+43 平方=6.557439.2f
+19 平方=4.358899.2f
+20 平方=4.472136.2f
+21 平方=4.582576.2f
+22 平方=4.690416.2f
+23 平方=4.795832.2f
+24 平方=4.898979.2f
+25 平方=5.000000.2f
+26 平方=5.099020.2f
+27 平方=5.196152.2f
+46 平方=6.782330.2f
+44 平方=6.633250.2f
+47 平方=6.855655.2f
+16 平方=4.000000.2f
+45 平方=6.708204.2f
+2 平方=1.414214.2f
+1 平方=1.000000.2f
+48 平方=6.928203.2f
+17 平方=4.123106.2f
+								</pre>
+							</p>
 						</div>
 					</div>
 
