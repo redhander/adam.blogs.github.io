@@ -3004,6 +3004,7 @@ input, select, textarea {
 			position: absolute;
 			top: 0;
 			left: 0;
+			text-align: left;
 			width: 100%;
 			height: 100%;
 			padding: 2.75em;

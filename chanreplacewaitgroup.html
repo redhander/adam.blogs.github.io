@@ -22,10 +22,9 @@
 
 							<!-- Logo -->
 								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Phantom</span>
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Channel replace Waitgroup</span>
 								</a>
-
-							<!-- Nav -->
+						 
 								<nav>
 									<ul>
 										<li><a href="#menu">Menu</a></li>
@@ -50,11 +49,39 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Generic Page</h1>
+							<h3>channel replace sync.WaitGroup</h3>
 							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<p >
+								<pre>
+func main() {
+	resultCh := make(chan int, 10)
+	for i := 0; i < cap(resultCh); i++ {
+		go Task(resultCh, i)
+	}
+	for j := 0; j < cap(resultCh); j++ {
+		fmt.Printf("get resultCh:%d\n", <-resultCh)
+	}
+}
+func Task(resultCh chan<- int, param int) {
+	//println("start task")
+	time.Sleep(time.Second)
+	//println("finish task")
+	resultCh <- param
+}
+-------------------------------------------
+go run chanreplacewaitgroup.go
+get resultCh:0
+get resultCh:5
+get resultCh:9
+get resultCh:8
+get resultCh:7
+get resultCh:6
+get resultCh:3
+get resultCh:4
+get resultCh:2
+get resultCh:1
+								</pre>
+							</p>
 						</div>
 					</div>
 

@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Adam by HTML5 UP</title>
+		<title>Generic - Phantom by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -22,10 +22,9 @@
 
 							<!-- Logo -->
 								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Adam's Blog</span>
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Channel replace Waitgroup</span>
 								</a>
-
-							<!-- Nav -->
+						 
 								<nav>
 									<ul>
 										<li><a href="#menu">Menu</a></li>
@@ -50,47 +49,39 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<header>
-								<h1>Adam's personal blogs-Adam 个人博客<br /></h1>
-								<h3>Personal articles mainly about Golang 主要内容是go语言的文章</a>.</h3>
-								<p>Go学习与使用</p>
-							</header>
-							<section class="tiles">
-								<article class="style1">
-									<span class="image">
-										<img src="images/pic01.jpg" alt="" />
-									</span>
-									<a href="chanreplacewaitgroup.html">
-										<h2>Channel replace WaitGroup</h2>
-										<div class="content">
-											<p>Using Channel to replace sync.WaitGroup.用Channel代替sync.Waitgroup</p>
-										</div>
-									</a>
-								</article>
-								<article class="style2">
-									<span class="image">
-										<img src="images/pic02.jpg" alt="" />
-									</span>
-									<a href="semaphore.html">
-										<h2>Chan apply Semaphore</h2>
-										<div class="content">
-											<p>Using channel to apply semaphore-使用channel 实现信号量</p>
-										</div>
-									</a>
-								</article>
-								<article class="style3">
-									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Feugiat</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-				 
-							</section>
+							<h3>channel apply semaphore</h3>
+							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
+							<p >
+								<pre>
+func main() {
+	resultCh := make(chan int, 10)
+	for i := 0; i < cap(resultCh); i++ {
+		go Task(resultCh, i)
+	}
+	for j := 0; j < cap(resultCh); j++ {
+		fmt.Printf("get resultCh:%d\n", <-resultCh)
+	}
+}
+func Task(resultCh chan<- int, param int) {
+	//println("start task")
+	time.Sleep(time.Second)
+	//println("finish task")
+	resultCh <- param
+}
+-------------------------------------------
+go run chanreplacewaitgroup.go
+get resultCh:0
+get resultCh:5
+get resultCh:9
+get resultCh:8
+get resultCh:7
+get resultCh:6
+get resultCh:3
+get resultCh:4
+get resultCh:2
+get resultCh:1
+								</pre>
+							</p>
 						</div>
 					</div>
 
